@@ -191,7 +191,11 @@ angular.module('ng-token-auth', ['ipCookie'])
             successUrl = @getResultOrValue(@getConfig(opts.config).confirmationSuccessUrl)
             angular.extend(params, {
               confirm_success_url: successUrl,
-              config_name: @getCurrentConfigName(opts.config)
+              config_name: @getCurrentConfigName(opts.config),
+              withCredentials: true,
+              headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+              }
             })
             $http.post(@apiUrl(opts.config) + @getConfig(opts.config).emailRegistrationPath, params)
               .then(resp) =>

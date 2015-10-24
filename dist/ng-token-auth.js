@@ -171,7 +171,11 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
               successUrl = this.getResultOrValue(this.getConfig(opts.config).confirmationSuccessUrl);
               angular.extend(params, {
                 confirm_success_url: successUrl,
-                config_name: this.getCurrentConfigName(opts.config)
+                config_name: this.getCurrentConfigName(opts.config),
+                withCredentials: true,
+                headers: {
+                  'Content-Type': 'application/json; charset=utf-8'
+                }
               });
               return $http.post(this.apiUrl(opts.config) + this.getConfig(opts.config).emailRegistrationPath, params).then(resp)((function(_this) {
                 return function() {
