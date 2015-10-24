@@ -2,11 +2,57 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/node_modules/gulp-awspublish/node_modules/knox/node_modules/xml2js/incompat.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/karma-chai-plugins/node_modules/chai-things/test/all.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp-awspublish/node_modules/knox/node_modules/xml2js/borker.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/karma-chai-plugins/node_modules/chai-things/test/something.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp-jshint/node_modules/jshint/node_modules/cli/examples/static.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp-connect/src/index.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/karma/requirejs.config.tpl.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/karma-coverage/node_modules/istanbul/node_modules/resolve/test/resolver/cup.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp-coffee/test/fixtures/grammar.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/liftoff/node_modules/resolve/test/resolver/mug.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/karma-coverage/node_modules/istanbul/node_modules/resolve/test/resolver/mug.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/config/test/config/default.js" />
         <item url="file://$PROJECT_DIR$/src/ng-token-auth.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp-stylus/node_modules/accord/node_modules/resolve/test/resolver/mug.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp-stylus/node_modules/accord/node_modules/resolve/test/resolver/cup.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/karma-cli/node_modules/resolve/test/resolver/cup.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/liftoff/node_modules/resolve/test/resolver/cup.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/karma-cli/node_modules/resolve/test/resolver/mug.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/karma-coverage/node_modules/ibrik/gulpfile.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp-awspublish/node_modules/knox/node_modules/xml2js/83.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-watcher/test/fixtures/test.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp-nodemon/test/server.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp-awspublish/node_modules/knox/node_modules/xml2js/text.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/karma-chai-plugins/node_modules/chai-things/test/variants.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/node_modules/gulp-jshint/node_modules/jshint/node_modules/cli/examples/static.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/karma/requirejs.config.tpl.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/karma-coverage/node_modules/istanbul/node_modules/resolve/test/resolver/mug.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp-stylus/node_modules/accord/node_modules/resolve/test/resolver/cup.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/karma-cli/node_modules/resolve/test/resolver/cup.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/liftoff/node_modules/resolve/test/resolver/cup.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/karma-cli/node_modules/resolve/test/resolver/mug.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/karma-coverage/node_modules/ibrik/gulpfile.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp-awspublish/node_modules/knox/node_modules/xml2js/83.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-watcher/test/fixtures/test.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp-nodemon/test/server.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp-awspublish/node_modules/knox/node_modules/xml2js/text.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/karma-chai-plugins/node_modules/chai-things/test/variants.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp-awspublish/node_modules/knox/node_modules/xml2js/incompat.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/karma-chai-plugins/node_modules/chai-things/test/all.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp-awspublish/node_modules/knox/node_modules/xml2js/borker.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/karma-chai-plugins/node_modules/chai-things/test/something.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp-connect/src/index.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/karma-coverage/node_modules/istanbul/node_modules/resolve/test/resolver/cup.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp-coffee/test/fixtures/grammar.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/liftoff/node_modules/resolve/test/resolver/mug.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/config/test/config/default.js" />
       <root url="file://$PROJECT_DIR$/src/ng-token-auth.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp-stylus/node_modules/accord/node_modules/resolve/test/resolver/mug.js" />
     </CLASSES>
     <SOURCES />
   </library>

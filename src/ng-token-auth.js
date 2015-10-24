@@ -175,14 +175,15 @@
                   confirm_success_url: successUrl,
                   config_name: this.getCurrentConfigName(opts.config)
                 });
-                $http.post(this.apiUrl(opts.config) + this.getConfig(opts.config).emailRegistrationPath, params).then(resp)((function(_this) {
+                return $http.post(this.apiUrl(opts.config) + this.getConfig(opts.config).emailRegistrationPath, params).then(resp)((function(_this) {
                   return function() {
                     return $rootScope.$broadcast('auth:registration-email-success', params);
                   };
+                })(this), (function(_this) {
+                  return function(resp) {
+                    return $rootScope.$broadcast('auth:registration-email-error', resp);
+                  };
                 })(this));
-                return function(resp) {
-                  return $rootScope.$broadcast('auth:registration-email-error', resp);
-                };
               },
               submitLogin: function(params, opts) {
                 if (opts == null) {

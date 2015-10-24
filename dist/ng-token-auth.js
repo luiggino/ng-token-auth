@@ -173,11 +173,15 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
                 confirm_success_url: successUrl,
                 config_name: this.getCurrentConfigName(opts.config)
               });
-              return $http.post(this.apiUrl(opts.config) + this.getConfig(opts.config).emailRegistrationPath, params).success(function(resp) {
-                return $rootScope.$broadcast('auth:registration-email-success', params);
-              }).error(function(resp) {
-                return $rootScope.$broadcast('auth:registration-email-error', resp);
-              });
+              return $http.post(this.apiUrl(opts.config) + this.getConfig(opts.config).emailRegistrationPath, params).then(resp)((function(_this) {
+                return function() {
+                  return $rootScope.$broadcast('auth:registration-email-success', params);
+                };
+              })(this), (function(_this) {
+                return function(resp) {
+                  return $rootScope.$broadcast('auth:registration-email-error', resp);
+                };
+              })(this));
             },
             submitLogin: function(params, opts) {
               if (opts == null) {
@@ -395,18 +399,21 @@ angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
               return str.join("&");
             },
             parseLocation: function(location) {
-              var i, obj, pair, pairs;
-              pairs = location.substring(1).split('&');
+              var i, locationSubstring, obj, pair, pairs;
+              locationSubstring = location.substring(1);
               obj = {};
-              pair = void 0;
-              i = void 0;
-              for (i in pairs) {
-                i = i;
-                if (pairs[i] === '') {
-                  continue;
+              if (locationSubstring) {
+                pairs = locationSubstring.split('&');
+                pair = void 0;
+                i = void 0;
+                for (i in pairs) {
+                  i = i;
+                  if (pairs[i] === '') {
+                    continue;
+                  }
+                  pair = pairs[i].split('=');
+                  obj[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
                 }
-                pair = pairs[i].split('=');
-                obj[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
               }
               return obj;
             },
