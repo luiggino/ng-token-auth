@@ -1,6 +1,6 @@
 {
   "name": "ng-token-auth-fork",
-  "version": "0.0.30-1",
+  "version": "0.0.31",
   "authors": [
     "Lynn Dylan Hurley <lynn.dylan.hurley@gmail.com>",
     "Luiggino Obreque Minio <luiggino.om@gmail.com>"
@@ -27,6 +27,7 @@
   ],
   "dependencies": {
     "angular": "~1.4.4",
-    "angular-cookie": "~4.0.9"
+    "angular-cookie": "~4.0.9",
+    "angular-local-storage": "~0.2.3"
   }
 }

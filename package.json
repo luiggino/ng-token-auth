@@ -1,6 +1,6 @@
 {
   "name": "ng-token-auth-fork",
-  "version": "0.0.30-1",
+  "version": "0.0.31",
   "dependencies": {
     "config": "~0.4.35",
     "crypto": "0.0.3",

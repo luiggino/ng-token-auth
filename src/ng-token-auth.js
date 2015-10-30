@@ -4,7 +4,7 @@
     module.exports = 'ng-token-auth';
   }
 
-  angular.module('ng-token-auth', ['ipCookie']).provider('$auth', function() {
+  angular.module('ng-token-auth', ['LocalStorageModule']).provider('$auth', function() {
     var configs, defaultConfigName;
     configs = {
       "default": {
@@ -89,8 +89,8 @@
         return configs;
       },
       $get: [
-        '$http', '$q', '$location', 'ipCookie', '$window', '$timeout', '$rootScope', '$interpolate', '$interval', (function(_this) {
-          return function($http, $q, $location, ipCookie, $window, $timeout, $rootScope, $interpolate, $interval) {
+        '$http', '$q', '$location', 'localStorageService', '$window', '$timeout', '$rootScope', '$interpolate', '$interval', (function(_this) {
+          return function($http, $q, $location, localStorageService, $window, $timeout, $rootScope, $interpolate, $interval) {
             return {
               header: null,
               dfd: null,
@@ -173,11 +173,7 @@
                 successUrl = this.getResultOrValue(this.getConfig(opts.config).confirmationSuccessUrl);
                 angular.extend(params, {
                   confirm_success_url: successUrl,
-                  config_name: this.getCurrentConfigName(opts.config),
-                  withCredentials: true,
-                  headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                  }
+                  config_name: this.getCurrentConfigName(opts.config)
                 });
                 return $http.post(this.apiUrl(opts.config) + this.getConfig(opts.config).emailRegistrationPath, params).then((function(response) {
                   return $rootScope.$broadcast('auth:registration-email-success', response);
@@ -600,17 +596,7 @@
                 if (this.getConfig(configName).storage instanceof Object) {
                   return this.getConfig(configName).storage.persistData(key, val, this.getConfig(configName));
                 } else {
-                  switch (this.getConfig(configName).storage) {
-                    case 'localStorage':
-                      return $window.localStorage.setItem(key, JSON.stringify(val));
-                    default:
-                      return ipCookie(key, val, {
-                        path: '/',
-                        expires: 9999,
-                        expirationUnit: 'days',
-                        secure: this.getConfig(configName).secureCookies
-                      });
-                  }
+                  return localStorageService.set(key, JSON.stringify(val));
                 }
               },
               retrieveData: function(key) {
@@ -619,12 +605,7 @@
                   if (this.getConfig().storage instanceof Object) {
                     return this.getConfig().storage.retrieveData(key);
                   } else {
-                    switch (this.getConfig().storage) {
-                      case 'localStorage':
-                        return JSON.parse($window.localStorage.getItem(key));
-                      default:
-                        return ipCookie(key);
-                    }
+                    return JSON.parse(localStorageService.get(key));
                   }
                 } catch (error1) {
                   e = error1;
@@ -639,14 +620,7 @@
                 if (this.getConfig().storage instanceof Object) {
                   this.getConfig().storage.deleteData(key);
                 }
-                switch (this.getConfig().storage) {
-                  case 'localStorage':
-                    return $window.localStorage.removeItem(key);
-                  default:
-                    return ipCookie.remove(key, {
-                      path: '/'
-                    });
-                }
+                return localStorageService.remove(key);
               },
               setAuthHeaders: function(h) {
                 var expiry, newHeaders, now, result;
@@ -706,29 +680,13 @@
                 var c, key;
                 c = void 0;
                 key = 'currentConfigName';
-                if (this.hasLocalStorage()) {
-                  if (c == null) {
-                    c = JSON.parse($window.localStorage.getItem(key));
-                  }
-                }
                 if (c == null) {
-                  c = ipCookie(key);
+                  c = JSON.parse(localStorageService.get(key));
                 }
                 return c || defaultConfigName;
               },
               hasLocalStorage: function() {
-                var error, error1;
-                if (this._hasLocalStorage == null) {
-                  this._hasLocalStorage = false;
-                  try {
-                    $window.localStorage.setItem('ng-token-auth-test', 'ng-token-auth-test');
-                    $window.localStorage.removeItem('ng-token-auth-test');
-                    this._hasLocalStorage = true;
-                  } catch (error1) {
-                    error = error1;
-                  }
-                }
-                return this._hasLocalStorage;
+                return localStorageService.isSupported;
               }
             };
           };

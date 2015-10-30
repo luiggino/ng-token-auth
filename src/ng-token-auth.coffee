@@ -1,7 +1,7 @@
 if typeof module != 'undefined' and typeof exports != 'undefined' and module.exports == exports
   module.exports = 'ng-token-auth'
 
-angular.module('ng-token-auth', ['ipCookie'])
+angular.module('ng-token-auth', ['LocalStorageModule'])
   .provider('$auth', ->
     configs =
       default:
@@ -90,13 +90,13 @@ angular.module('ng-token-auth', ['ipCookie'])
         '$http'
         '$q'
         '$location'
-        'ipCookie'
+        'localStorageService'
         '$window'
         '$timeout'
         '$rootScope'
         '$interpolate'
         '$interval'
-        ($http, $q, $location, ipCookie, $window, $timeout, $rootScope, $interpolate, $interval) =>
+        ($http, $q, $location, localStorageService, $window, $timeout, $rootScope, $interpolate, $interval) =>
           header:            null
           dfd:               null
           user:              {}
@@ -192,11 +192,7 @@ angular.module('ng-token-auth', ['ipCookie'])
             angular.extend(params, {
               confirm_success_url: successUrl,
               config_name: @getCurrentConfigName(opts.config),
-              withCredentials: true,
-              headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-              }
-            })
+             })
             $http.post(@apiUrl(opts.config) + @getConfig(opts.config).emailRegistrationPath, params)
             .then(((response) ->
                 $rootScope.$broadcast('auth:registration-email-success', response)
@@ -691,11 +687,7 @@ angular.module('ng-token-auth', ['ipCookie'])
             if @getConfig(configName).storage instanceof Object
               @getConfig(configName).storage.persistData(key, val, @getConfig(configName))
             else
-              switch @getConfig(configName).storage
-                when 'localStorage'
-                  $window.localStorage.setItem(key, JSON.stringify(val))
-                else
-                  ipCookie(key, val, {path: '/', expires: 9999, expirationUnit: 'days', secure: @getConfig(configName).secureCookies})
+              localStorageService.set(key, JSON.stringify(val))
 
           # abstract persistent data retrieval
           retrieveData: (key) ->
@@ -703,10 +695,7 @@ angular.module('ng-token-auth', ['ipCookie'])
               if @getConfig().storage instanceof Object
                 @getConfig().storage.retrieveData(key)
               else
-                switch @getConfig().storage
-                  when 'localStorage'
-                    JSON.parse($window.localStorage.getItem(key))
-                  else ipCookie(key)
+                JSON.parse(localStorageService.get(key))
             catch e
               # gracefully handle if JSON parsing
               if e instanceof SyntaxError
@@ -718,11 +707,7 @@ angular.module('ng-token-auth', ['ipCookie'])
           deleteData: (key) ->
             if @getConfig().storage instanceof Object
               @getConfig().storage.deleteData(key);
-            switch @getConfig().storage
-              when 'localStorage'
-                $window.localStorage.removeItem(key)
-              else
-                ipCookie.remove(key, {path: '/'})
+            localStorageService.remove(key)
 
           # persist authentication token, client id, uid
           setAuthHeaders: (h) ->
@@ -800,26 +785,13 @@ angular.module('ng-token-auth', ['ipCookie'])
             c   = undefined
             key = 'currentConfigName'
 
-            if @hasLocalStorage()
-              c ?= JSON.parse($window.localStorage.getItem(key))
-
-            c ?= ipCookie(key)
+            c ?= JSON.parse(localStorageService.get(key))
 
             return c || defaultConfigName
 
           hasLocalStorage: ->
-            if !@_hasLocalStorage?
 
-              @_hasLocalStorage = false
-              # trying to call setItem will
-              # throw an error if localStorage is disabled
-              try
-                $window.localStorage.setItem('ng-token-auth-test', 'ng-token-auth-test');
-                $window.localStorage.removeItem('ng-token-auth-test');
-                @_hasLocalStorage = true
-              catch error
-
-            return @_hasLocalStorage
+            return localStorageService.isSupported
 
 
       ]
