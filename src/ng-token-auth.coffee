@@ -35,9 +35,9 @@ angular.module('ng-token-auth', ['LocalStorageModule'])
           # convert from ruby time (seconds) to js time (millis)
           (parseInt(headers['expiry'], 10) * 1000) || null
 
-        handleLoginResponse:           (resp) -> resp.data
-        handleAccountUpdateResponse:   (resp) -> resp.data
-        handleTokenValidationResponse: (resp) -> resp.data
+        handleLoginResponse:           (resp) -> resp.data.data
+        handleAccountUpdateResponse:   (resp) -> resp.data.data
+        handleTokenValidationResponse: (resp) -> resp.data.data
 
         authProviderPaths:
           github:    '/auth/github'

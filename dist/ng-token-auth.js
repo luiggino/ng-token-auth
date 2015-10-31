@@ -41,13 +41,13 @@ angular.module('ng-token-auth', ['LocalStorageModule']).provider('$auth', functi
         return (parseInt(headers['expiry'], 10) * 1000) || null;
       },
       handleLoginResponse: function(resp) {
-        return resp.data;
+        return resp.data.data;
       },
       handleAccountUpdateResponse: function(resp) {
-        return resp.data;
+        return resp.data.data;
       },
       handleTokenValidationResponse: function(resp) {
-        return resp.data;
+        return resp.data.data;
       },
       authProviderPaths: {
         github: '/auth/github',
